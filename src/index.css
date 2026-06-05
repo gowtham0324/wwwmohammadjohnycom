@@ -23,6 +23,32 @@ body {
   max-width: 760px;
 }
 
+.site-shell {
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+}
+
+.site-header,
+.site-footer {
+  background: rgba(16, 23, 36, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 24px 28px;
+}
+
+.site-brand {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 700;
+}
+
+.site-tag {
+  margin: 8px 0 0;
+  color: #94a3b8;
+}
+
 .page-header {
   margin-bottom: 28px;
   padding: 32px 28px;
