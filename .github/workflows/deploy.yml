@@ -4,12 +4,15 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@4
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -22,7 +25,22 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Validate FTP secrets
+        id: validate-secrets
+        run: |
+          if [ -z "${{ secrets.FTP_SERVER }}" ] || [ -z "${{ secrets.FTP_USERNAME }}" ] || [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
+            echo "missing=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "missing=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Skip FTP deployment when secrets are missing
+        if: steps.validate-secrets.outputs.missing == 'true'
+        run: |
+          echo "Skipping FTP deployment because FTP_SERVER, FTP_USERNAME, or FTP_PASSWORD is not configured."
+
       - name: Deploy via FTP
+        if: steps.validate-secrets.outputs.missing == 'false'
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
