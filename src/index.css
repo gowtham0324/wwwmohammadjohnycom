@@ -1,0 +1,87 @@
+*:not(code) {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+  color: #eaf0ff;
+}
+
+.app-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.page-layout {
+  width: 100%;
+  max-width: 760px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+  padding: 32px 28px;
+  border-radius: 24px;
+  background: rgba(16, 23, 36, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+.page-header p {
+  margin: 12px 0 0;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.card {
+  max-width: 520px;
+  width: 100%;
+  background: rgba(11, 17, 28, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+p {
+  line-height: 1.8;
+  margin: 16px 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  padding: 14px 24px;
+  color: #ffffff;
+  background: #2563eb;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.note {
+  margin-top: 16px;
+  color: #94a3b8;
+}
