@@ -2,4 +2,10 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/vzwmozxb/public_html/
-    - /bin/cp -R * $DEPLOYPATH
+    - export NVM_DIR=$HOME/.nvm
+    - '[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"'
+    - npm ci || npm install
+    - npm run build
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R dist/. $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH
