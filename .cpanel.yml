@@ -2,18 +2,8 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/vzwmozxb/public_html/
-    - export LOGFILE=/home/vzwmozxb/public_html/deploy-log.txt
-    - export NVM_DIR=$HOME/.nvm
-    - touch $LOGFILE
-    - echo "=== deploy start $(date) ===" >> $LOGFILE
-    - which node >> $LOGFILE 2>&1
-    - which npm >> $LOGFILE 2>&1
-    - node -v >> $LOGFILE 2>&1
-    - npm -v >> $LOGFILE 2>&1
-    - npm ci >> $LOGFILE 2>&1
-    - npm run build >> $LOGFILE 2>&1
-    - ls -la dist >> $LOGFILE 2>&1
+    - /bin/rm -f $DEPLOYPATH/package.json $DEPLOYPATH/package-lock.json $DEPLOYPATH/vite.config.js $DEPLOYPATH/README.md $DEPLOYPATH/deploy-log.txt
+    - /bin/rm -rf $DEPLOYPATH/src $DEPLOYPATH/scripts
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R dist/. $DEPLOYPATH
     - /bin/cp -f .htaccess $DEPLOYPATH
-    - echo "=== deploy end $(date) ===" >> $LOGFILE
