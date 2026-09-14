@@ -4,12 +4,16 @@ deployment:
     - export DEPLOYPATH=/home/vzwmozxb/public_html/
     - export LOGFILE=/home/vzwmozxb/public_html/deploy-log.txt
     - export NVM_DIR=$HOME/.nvm
-    - '[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"'
-    - echo "=== Deploy start $(date) ===" > $LOGFILE
-    - '{ echo "--- environment ---"; which node; which npm; node -v; npm -v; echo "PATH=$PATH"; } >> $LOGFILE 2>&1'
-    - '{ echo "--- install ---"; npm ci || npm install; } >> $LOGFILE 2>&1'
-    - '{ echo "--- build ---"; npm run build; } >> $LOGFILE 2>&1'
+    - touch $LOGFILE
+    - echo "=== deploy start $(date) ===" >> $LOGFILE
+    - which node >> $LOGFILE 2>&1
+    - which npm >> $LOGFILE 2>&1
+    - node -v >> $LOGFILE 2>&1
+    - npm -v >> $LOGFILE 2>&1
+    - npm ci >> $LOGFILE 2>&1
+    - npm run build >> $LOGFILE 2>&1
+    - ls -la dist >> $LOGFILE 2>&1
     - /bin/mkdir -p $DEPLOYPATH
-    - '{ echo "--- copy dist ---"; ls -la dist 2>&1; /bin/cp -R dist/. $DEPLOYPATH; } >> $LOGFILE 2>&1'
+    - /bin/cp -R dist/. $DEPLOYPATH
     - /bin/cp -f .htaccess $DEPLOYPATH
-    - echo "=== Deploy end $(date) ===" >> $LOGFILE
+    - echo "=== deploy end $(date) ===" >> $LOGFILE
